@@ -1,38 +1,167 @@
-<!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>순심 가계부</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Pretendard", sans-serif;
+      background: #fafafa;
+      color: #333;
+    }
 
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
+    header {
+      padding: 40px 20px;
+      text-align: center;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
 
-  <title>한순도</title>
-  <meta name="description" content="soon page">
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+    header p {
+      font-size: 1.2rem;
+      color: #666;
+    }
 
+    section {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .feature-card p {
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .reviews {
+      margin-top: 40px;
+    }
+
+    .review-card {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      margin-bottom: 20px;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .review-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .review-stars {
+      color: #ffd23f;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      margin-top: 80px;
+      padding: 30px;
+      text-align: center;
+      color: #777;
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <h1>순심 가계부</h1>
+    <p>당신의 자산을 가장 쉽고 편안하게 관리하는 방법</p>
+  </header>
 
-  <div class="wrapper">
-    <header>
-      <h1 class="title">ㅋㅋ</h1>
-    </header>
-    <div id="container">
-    
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/wawo99/wawo99.github.com/tarball/master" class="tar">tar</a><a href="https://github.com/wawo99/wawo99.github.com/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
+  <section>
+    <h2>주요 기능</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>간편한 지출 기록</h3>
+        <p>몇 번의 터치만으로 지출을 빠르게 기록하고 카테고리별로 정리할 수 있어요.</p>
+      </div>
 
-  
+      <div class="feature-card">
+        <h3>맞춤형 예산 설정</h3>
+        <p>원하는 카테고리별 예산을 설정하고, 월별 소비를 체계적으로 관리하세요.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>실시간 통계 분석</h3>
+        <p>지출 패턴을 분석해주는 통계 기능으로 더 똑똑한 소비 습관을 만들 수 있어요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews">
+    <h2>사용자 리뷰</h2>
+
+    <div class="review-card">
+      <div class="review-header">
+        <span class="review-name">김하늘</span>
+        <span class="review-stars">★★★★★</span>
+      </div>
+      <p>매일 쓰는 가계부예요! 지출 기록이 너무 편해서 다른 앱은 못 쓰겠어요.</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <span class="review-name">이준호</span>
+        <span class="review-stars">★★★★☆</span>
+      </div>
+      <p>예산 기능이 정말 좋아요. 덕분에 한 달 소비가 확실히 줄었습니다.</p>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <span class="review-name">박소연</span>
+        <span class="review-stars">★★★★★</span>
+      </div>
+      <p>통계 분석이 직관적이라서 제가 어디에 돈을 쓰고 있는지 한눈에 보여요.</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 순심 — All Rights Reserved
+  </footer>
+
+  <script>
+    // 향후 인터랙션 기능 확장 가능
+    console.log("순심 가계부 페이지 로딩 완료");
+  </script>
 </body>
 </html>
