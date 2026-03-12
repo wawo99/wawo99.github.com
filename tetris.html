@@ -2,7 +2,10 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>테트리스 제스처 컨트롤 버전</title>
     <style>
       /* 기본 스타일 유지 및 모바일 최적화 */
@@ -36,20 +39,42 @@
           grid-template-columns: repeat(10, 35px);
         }
       }
-      .cell { width: 100%; height: 100%; background: #111; }
-      .ghost { border: 1px dashed #666; background: #222; }
-      .active { border: 1px solid rgba(255,255,255,0.5); }
-      .filled { border: 1px solid rgba(0,0,0,0.2); }
-      #info { margin: 10px 0; font-size: 18px; font-weight: bold; }
-      .instruction { color: #888; font-size: 12px; margin-top: 5px; }
+      .cell {
+        width: 100%;
+        height: 100%;
+        background: #111;
+      }
+      .ghost {
+        border: 1px dashed #666;
+        background: #222;
+      }
+      .active {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+      .filled {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+      }
+      #info {
+        margin: 10px 0;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .instruction {
+        color: #888;
+        font-size: 12px;
+        margin-top: 5px;
+      }
     </style>
   </head>
   <body>
-
     <div id="game-container">
-      <div id="info">SCORE: <span id="score-val">0</span> | LV: <span id="level-val">1</span></div>
+      <div id="info">
+        SCORE: <span id="score-val">0</span> | LV: <span id="level-val">1</span>
+      </div>
       <div id="tetris"></div>
-      <div class="instruction">좌우 스와이프: 이동 | 탭: 회전 | 아래로 훅: 바로내리기</div>
+      <div class="instruction">
+        좌우 스와이프: 이동 | 탭: 회전 | 아래로 훅: 바로내리기
+      </div>
     </div>
 
     <script>
@@ -70,11 +95,27 @@
 
       // 테트로미노 및 로직 (중략 방지 위해 필수 로직 포함)
       const tetrominoes = [
-        [[1, width + 1, width * 2 + 1, 2], [width, width + 1, width + 2, width * 2 + 2], [1, width + 1, width * 2 + 1, width * 2], [width, width * 2, width * 2 + 1, width * 2 + 2]], // L
-        [[0, 1, width + 1, width + 2], [2, width + 1, width + 2, width * 2 + 1]], // Z
-        [[1, width, width + 1, width + 2], [1, width + 1, width + 2, width * 2 + 1], [width, width + 1, width + 2, width * 2 + 1], [1, width, width + 1, width * 2 + 1]], // T
+        [
+          [1, width + 1, width * 2 + 1, 2],
+          [width, width + 1, width + 2, width * 2 + 2],
+          [1, width + 1, width * 2 + 1, width * 2],
+          [width, width * 2, width * 2 + 1, width * 2 + 2],
+        ], // L
+        [
+          [0, 1, width + 1, width + 2],
+          [2, width + 1, width + 2, width * 2 + 1],
+        ], // Z
+        [
+          [1, width, width + 1, width + 2],
+          [1, width + 1, width + 2, width * 2 + 1],
+          [width, width + 1, width + 2, width * 2 + 1],
+          [1, width, width + 1, width * 2 + 1],
+        ], // T
         [[0, 1, width, width + 1]], // O
-        [[1, width + 1, width * 2 + 1, width * 3 + 1], [width, width + 1, width + 2, width + 3]] // I
+        [
+          [1, width + 1, width * 2 + 1, width * 3 + 1],
+          [width, width + 1, width + 2, width + 3],
+        ], // I
       ];
       const colors = ["#FF9F00", "#FF4040", "#AF44FF", "#FFCC00", "#00E5FF"];
 
@@ -94,37 +135,49 @@
 
       function getGhostPosition() {
         let ghostPos = currentPosition;
-        while (isValidPosition(ghostPos + width, currentRotation)) ghostPos += width;
+        while (isValidPosition(ghostPos + width, currentRotation))
+          ghostPos += width;
         return ghostPos;
       }
 
       function draw() {
         const ghostPos = getGhostPosition();
-        currentShape[currentRotation % currentShape.length].forEach(index => {
+        currentShape[currentRotation % currentShape.length].forEach((index) => {
           cells[ghostPos + index].classList.add("ghost");
           const cell = cells[currentPosition + index];
           cell.classList.add("active");
-          cell.style.backgroundColor = colors[tetrominoes.indexOf(currentShape)];
+          cell.style.backgroundColor =
+            colors[tetrominoes.indexOf(currentShape)];
         });
       }
 
       function undraw() {
-        cells.forEach(cell => {
+        cells.forEach((cell) => {
           cell.classList.remove("active", "ghost");
-          if (!cell.classList.contains("filled")) cell.style.backgroundColor = "";
+          if (!cell.classList.contains("filled"))
+            cell.style.backgroundColor = "";
         });
       }
 
       function isValidPosition(pos, rotation) {
-        return currentShape[rotation % currentShape.length].every(index => {
+        return currentShape[rotation % currentShape.length].every((index) => {
           const cellIndex = pos + index;
           const x = cellIndex % width;
           const y = Math.floor(cellIndex / width);
-          const isAtRightEdge = currentShape[rotation % currentShape.length].some(i => (pos + i) % width === width - 1);
-          const isAtLeftEdge = currentShape[rotation % currentShape.length].some(i => (pos + i) % width === 0);
-          
-          return y < height && cellIndex >= 0 && !cells[cellIndex].classList.contains("filled") &&
-                 !(isAtLeftEdge && x === width - 1) && !(isAtRightEdge && x === 0);
+          const isAtRightEdge = currentShape[
+            rotation % currentShape.length
+          ].some((i) => (pos + i) % width === width - 1);
+          const isAtLeftEdge = currentShape[
+            rotation % currentShape.length
+          ].some((i) => (pos + i) % width === 0);
+
+          return (
+            y < height &&
+            cellIndex >= 0 &&
+            !cells[cellIndex].classList.contains("filled") &&
+            !(isAtLeftEdge && x === width - 1) &&
+            !(isAtRightEdge && x === 0)
+          );
         });
       }
 
@@ -139,7 +192,7 @@
       }
 
       function freeze() {
-        currentShape[currentRotation % currentShape.length].forEach(index => {
+        currentShape[currentRotation % currentShape.length].forEach((index) => {
           cells[currentPosition + index].classList.add("filled");
         });
         clearRows();
@@ -153,16 +206,17 @@
 
       function clearRows() {
         for (let i = 0; i < 199; i += width) {
-          const row = Array.from({length: width}, (_, k) => i + k);
-          if (row.every(index => cells[index].classList.contains("filled"))) {
-            score += 10; scoreEl.innerText = score;
-            row.forEach(index => {
+          const row = Array.from({ length: width }, (_, k) => i + k);
+          if (row.every((index) => cells[index].classList.contains("filled"))) {
+            score += 10;
+            scoreEl.innerText = score;
+            row.forEach((index) => {
               cells[index].classList.remove("filled");
               cells[index].style.backgroundColor = "";
             });
             const removed = cells.splice(i, width);
             cells = removed.concat(cells);
-            cells.forEach(cell => grid.appendChild(cell));
+            cells.forEach((cell) => grid.appendChild(cell));
           }
         }
       }
@@ -172,56 +226,82 @@
       let touchStartY = 0;
       let lastTapTime = 0;
 
-      window.addEventListener("touchstart", (e) => {
-        touchStartX = e.touches[0].screenX;
-        touchStartY = e.touches[0].screenY;
-        
-        // 탭(회전) 감지
-        const now = Date.now();
-        if (now - lastTapTime < 300) {
-          // 더블탭 방어용 (필요시 하드드롭 연결 가능)
-        }
-        lastTapTime = now;
-      }, { passive: false });
+      window.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.touches[0].screenX;
+          touchStartY = e.touches[0].screenY;
 
-      window.addEventListener("touchend", (e) => {
-        const touchEndX = e.changedTouches[0].screenX;
-        const touchEndY = e.changedTouches[0].screenY;
-        
-        const diffX = touchEndX - touchStartX;
-        const diffY = touchEndY - touchStartY;
+          // 탭(회전) 감지
+          const now = Date.now();
+          if (now - lastTapTime < 300) {
+            // 더블탭 방어용 (필요시 하드드롭 연결 가능)
+          }
+          lastTapTime = now;
+        },
+        { passive: false },
+      );
 
-        // 짧은 터치는 회전으로 간주
-        if (Math.abs(diffX) < 10 && Math.abs(diffY) < 10) {
-          undraw();
-          currentRotation++;
-          if (!isValidPosition(currentPosition, currentRotation)) currentRotation--;
-          draw();
-        } 
-        // 하래로 길게 훅 밀면 하드드롭
-        else if (diffY > 100) {
-          undraw();
-          currentPosition = getGhostPosition();
-          draw();
-          freeze();
-        }
-        // 좌우 이동
-        else if (Math.abs(diffX) > 30) {
-          undraw();
-          if (diffX > 0 && isValidPosition(currentPosition + 1, currentRotation)) currentPosition++;
-          else if (diffX < 0 && isValidPosition(currentPosition - 1, currentRotation)) currentPosition--;
-          draw();
-        }
-      }, { passive: false });
+      window.addEventListener(
+        "touchend",
+        (e) => {
+          const touchEndX = e.changedTouches[0].screenX;
+          const touchEndY = e.changedTouches[0].screenY;
+
+          const diffX = touchEndX - touchStartX;
+          const diffY = touchEndY - touchStartY;
+
+          // 짧은 터치는 회전으로 간주
+          if (Math.abs(diffX) < 10 && Math.abs(diffY) < 10) {
+            undraw();
+            currentRotation++;
+            if (!isValidPosition(currentPosition, currentRotation))
+              currentRotation--;
+            draw();
+          }
+          // 하래로 길게 훅 밀면 하드드롭
+          else if (diffY > 100) {
+            undraw();
+            currentPosition = getGhostPosition();
+            draw();
+            freeze();
+          }
+          // 좌우 이동
+          else if (Math.abs(diffX) > 30) {
+            undraw();
+            if (
+              diffX > 0 &&
+              isValidPosition(currentPosition + 1, currentRotation)
+            )
+              currentPosition++;
+            else if (
+              diffX < 0 &&
+              isValidPosition(currentPosition - 1, currentRotation)
+            )
+              currentPosition--;
+            draw();
+          }
+        },
+        { passive: false },
+      );
 
       // PC 키보드 지원 유지
       document.addEventListener("keydown", (e) => {
         undraw();
-        if (e.key === "ArrowLeft" && isValidPosition(currentPosition - 1, currentRotation)) currentPosition--;
-        if (e.key === "ArrowRight" && isValidPosition(currentPosition + 1, currentRotation)) currentPosition++;
+        if (
+          e.key === "ArrowLeft" &&
+          isValidPosition(currentPosition - 1, currentRotation)
+        )
+          currentPosition--;
+        if (
+          e.key === "ArrowRight" &&
+          isValidPosition(currentPosition + 1, currentRotation)
+        )
+          currentPosition++;
         if (e.key === "ArrowUp") {
           currentRotation++;
-          if (!isValidPosition(currentPosition, currentRotation)) currentRotation--;
+          if (!isValidPosition(currentPosition, currentRotation))
+            currentRotation--;
         }
         if (e.key === "ArrowDown") moveDown();
         if (e.key === " ") {
