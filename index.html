@@ -1,167 +1,452 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>순심 가계부</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Pretendard", sans-serif;
-      background: #fafafa;
-      color: #333;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>순심 | SOONSIM.dev - 20년 경력 IT 전문가</title>
+    <style>
+      /* --- 로고 스타일 영역 --- */
+      .logo-container {
+        display: flex; /* 로고 요소를 가로로 정렬 */
+        align-items: center; /* 로고 요소를 세로 중앙으로 정렬 */
+        font-family:
+          "Handwritten", cursive; /* 날렵한 느낌의 글꼴 사용 (필요에 따라 변경 가능) */
+        font-size: 2rem; /* 전체 로고 크기 설정 */
+      }
 
-    header {
-      padding: 40px 20px;
-      text-align: center;
-      background: #ffffff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
+      .logo-s-large {
+        color: yellow; /* 옐로우 색상 적용 */
+        font-size: 2rem; /* 첫 번째 S 크기 설정 (크게) */
+      }
 
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
+      .logo-soon {
+        color: white; /* 블랙 색상 적용 */
+        font-size: 1rem; /* 'Soon' 텍스트 크기 설정 */
+      }
 
-    header p {
-      font-size: 1.2rem;
-      color: #666;
-    }
+      .logo-s-small {
+        color: yellow; /* 옐로우 색상 적용 */
+        font-size: 1.2rem; /* 두 번째 S 크기 설정 (작게) */
+      }
 
-    section {
-      max-width: 1000px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
+      .logo-sim {
+        color: white; /* 블랙 색상 적용 */
+        font-size: 0.8rem; /* 'Sim' 텍스트 크기 설정 */
+      }
+      /* --- CSS 영역 --- */
+      :root {
+        --bg-color: #0b0b0b;
+        --card-bg: #161616;
+        --primary-yellow: #fbbf24; /* 메인 컬러 1 */
+        --point-purple: #8b5cf6; /* 메인 컬러 2 */
+        --text-main: #ffffff;
+        --text-dim: #a0a0a0;
+        --border-color: #2a2a2a;
+      }
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family:
+          "Pretendard",
+          -apple-system,
+          BlinkMacSystemFont,
+          system-ui,
+          Roboto,
+          sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
 
-    .feature-card {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      transition: transform 0.2s ease;
-    }
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: 0.3s;
+      }
+      ul {
+        list-style: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-    }
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(11, 11, 11, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+        cursor: pointer;
+      }
+      .logo span {
+        color: var(--point-purple);
+      }
+      nav ul {
+        display: flex;
+        gap: 30px;
+      }
+      nav ul li a:hover {
+        color: var(--primary-yellow);
+      }
 
-    .feature-card h3 {
-      margin-bottom: 10px;
-      font-size: 1.3rem;
-    }
+      /* Hero Section */
+      #hero {
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0b0b0b 80%);
+      }
+      .hero-tag {
+        color: var(--point-purple);
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
+      .hero-title {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        background: linear-gradient(to right, #fff, var(--primary-yellow));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-p {
+        color: var(--text-dim);
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin-bottom: 30px;
+      }
 
-    .feature-card p {
-      color: #555;
-      line-height: 1.5;
-    }
+      /* Section Commons */
+      section {
+        padding: 100px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .section-header {
+        margin-bottom: 50px;
+      }
+      .section-header h2 {
+        font-size: 2.5rem;
+        display: inline-block;
+        border-bottom: 4px solid var(--primary-yellow);
+        padding-bottom: 10px;
+      }
 
-    .reviews {
-      margin-top: 40px;
-    }
+      /* Company Intro (Services) */
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+      .service-card {
+        background: var(--card-bg);
+        padding: 40px;
+        border-radius: 15px;
+        border: 1px solid var(--border-color);
+        transition: 0.4s;
+      }
+      .service-card:hover {
+        border-color: var(--point-purple);
+        transform: translateY(-10px);
+      }
+      .service-card h3 {
+        color: var(--primary-yellow);
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+      }
+      .service-card p {
+        color: var(--text-dim);
+      }
 
-    .review-card {
-      background: white;
-      padding: 20px 30px;
-      border-radius: 14px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-      margin-bottom: 20px;
-    }
+      /* Skills */
+      .skills-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .skill-item {
+        background: transparent;
+        border: 1px solid var(--point-purple);
+        padding: 10px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        color: var(--point-purple);
+        transition: 0.3s;
+      }
+      .skill-item:hover {
+        background: var(--point-purple);
+        color: #fff;
+      }
 
-    .review-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
+      /* Projects */
+      .project-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px;
+        background: var(--card-bg);
+        border-radius: 10px;
+        margin-bottom: 15px;
+        transition: 0.3s;
+        border-left: 0 solid var(--primary-yellow);
+      }
+      .project-row:hover {
+        border-left-width: 8px;
+        padding-left: 22px;
+        background: #222;
+      }
+      .project-info h4 {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+      }
+      .project-info p {
+        color: var(--text-dim);
+        font-size: 0.9rem;
+      }
+      .btn-link {
+        color: var(--primary-yellow);
+        border: 1px solid var(--primary-yellow);
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-size: 0.85rem;
+      }
+      .btn-link:hover {
+        background: var(--primary-yellow);
+        color: #000;
+      }
 
-    .review-name {
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
+      /* Contact */
+      #contact {
+        text-align: center;
+        background: #000;
+        padding: 120px 0;
+      }
+      .contact-box {
+        display: inline-block;
+        background: var(--primary-yellow);
+        color: #000;
+        padding: 20px 40px;
+        border-radius: 10px;
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-top: 30px;
+        box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+      }
+      .footer-text {
+        margin-top: 60px;
+        color: #444;
+        font-size: 0.8rem;
+      }
 
-    .review-stars {
-      color: #ffd23f;
-      font-size: 1.2rem;
-    }
-
-    footer {
-      margin-top: 80px;
-      padding: 30px;
-      text-align: center;
-      color: #777;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>순심 가계부</h1>
-    <p>당신의 자산을 가장 쉽고 편안하게 관리하는 방법</p>
-  </header>
-
-  <section>
-    <h2>주요 기능</h2>
-    <div class="features">
-      <div class="feature-card">
-        <h3>간편한 지출 기록</h3>
-        <p>몇 번의 터치만으로 지출을 빠르게 기록하고 카테고리별로 정리할 수 있어요.</p>
+      @media (max-width: 768px) {
+        nav ul {
+          display: none;
+        } /* 심플함을 위해 모바일 메뉴 생략 */
+        .hero-title {
+          font-size: 3rem;
+        }
+        .project-row {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <div class="" onclick="window.scrollTo(0, 0)">
+            <div class="logo-container">
+              <span class="logo-s-large">S</span>
+              <span class="logo-soon">oon</span>
+              <span class="logo-s-small">S</span>
+              <span class="logo-sim">im</span>
+            </div>
+          </div>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
       </div>
+    </header>
 
-      <div class="feature-card">
-        <h3>맞춤형 예산 설정</h3>
-        <p>원하는 카테고리별 예산을 설정하고, 월별 소비를 체계적으로 관리하세요.</p>
+    <section id="hero">
+      <div class="hero-tag">ESTABLISHED SINCE 2004</div>
+      <h1 class="hero-title">Think to Reality</h1>
+      <p class="hero-p">
+        20년의 구력으로 상상하는 모든 로직을 완벽하게 구현합니다.
+        <br />프로페셔널 IT 파트너 순심입니다.
+      </p>
+      <div
+        class="skill-item"
+        style="
+          border-color: var(--primary-yellow);
+          color: var(--primary-yellow);
+        "
+      >
+        Professional Developer
       </div>
+    </section>
 
-      <div class="feature-card">
-        <h3>실시간 통계 분석</h3>
-        <p>지출 패턴을 분석해주는 통계 기능으로 더 똑똑한 소비 습관을 만들 수 있어요.</p>
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <h2>회사소개</h2>
+        </div>
+        <div class="service-grid">
+          <div class="service-card">
+            <h3>웹프로그램 개인주문제작</h3>
+            <p>
+              복잡한 비즈니스 로직을 단순하고 강력한 인터페이스로 구축합니다.
+              고객의 니즈에 맞춘 1:1 커스텀 개발을 지향합니다.
+            </p>
+          </div>
+          <div class="service-card">
+            <h3>하이브리드 앱개발</h3>
+            <p>
+              React Native, Flutter 등을 활용하여 하나의 소스로 iOS와 Android
+              앱을 동시에 구축, 운영 비용을 절감합니다.
+            </p>
+          </div>
+          <div class="service-card">
+            <h3>AI연동 개발</h3>
+            <p>
+              ChatGPT 등 최신 AI 기술을 기존 서비스에 결합하여 자동화 및
+              혁신적인 사용자 경험을 제공합니다.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="reviews">
-    <h2>사용자 리뷰</h2>
-
-    <div class="review-card">
-      <div class="review-header">
-        <span class="review-name">김하늘</span>
-        <span class="review-stars">★★★★★</span>
+    <section id="skills" style="background-color: #050505">
+      <div class="container">
+        <div class="section-header">
+          <h2>IT 개발 역량</h2>
+        </div>
+        <div class="skills-container">
+          <div class="skill-item">React</div>
+          <div class="skill-item">Vue Framework</div>
+          <div class="skill-item">Spring Framework</div>
+          <div class="skill-item">Html Dom(Document Object Model)</div>
+        </div>
       </div>
-      <p>매일 쓰는 가계부예요! 지출 기록이 너무 편해서 다른 앱은 못 쓰겠어요.</p>
-    </div>
+    </section>
 
-    <div class="review-card">
-      <div class="review-header">
-        <span class="review-name">이준호</span>
-        <span class="review-stars">★★★★☆</span>
+    <section id="projects">
+      <div class="container">
+        <div class="section-header">
+          <h2>Project History</h2>
+        </div>
+
+        <div class="project-row">
+          <div class="project-info">
+            <h4>사운드컴</h4>
+            <p>음향 도매 사이트 - 제작 및 운영중</p>
+          </div>
+          <a href="https://soundcom.co.kr" target="_blank" class="btn-link"
+            >Visit Website</a
+          >
+        </div>
+
+        <div class="project-row">
+          <div class="project-info">
+            <h4>한화생명</h4>
+            <p>AI화법 자동생성 시스템 - 운영중</p>
+          </div>
+          <a
+            href="https://aists.hanwhalife.com"
+            target="_blank"
+            class="btn-link"
+            >Visit Website</a
+          >
+        </div>
+
+        <div class="project-row">
+          <div class="project-info">
+            <h4>순심가계부</h4>
+            <p>하이브리드앱 가계부 - 베타테스트중</p>
+          </div>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.soonsim.expensetracker"
+            target="_blank"
+            class="btn-link"
+            >Google Play</a
+          >
+        </div>
       </div>
-      <p>예산 기능이 정말 좋아요. 덕분에 한 달 소비가 확실히 줄었습니다.</p>
-    </div>
+    </section>
 
-    <div class="review-card">
-      <div class="review-header">
-        <span class="review-name">박소연</span>
-        <span class="review-stars">★★★★★</span>
+    <footer id="contact">
+      <div class="container">
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px">
+          Let's Build Together
+        </h2>
+        <p style="color: var(--text-dim)">
+          상상을 기술로 현실화할 준비가 되셨나요?
+        </p>
+        <div class="contact-box">Kakao ID: wawo99</div>
+        <p class="footer-text">
+          &copy; 2024 SOONSIM. Think to Reality. All rights reserved.
+        </p>
       </div>
-      <p>통계 분석이 직관적이라서 제가 어디에 돈을 쓰고 있는지 한눈에 보여요.</p>
-    </div>
-  </section>
+    </footer>
 
-  <footer>
-    © 2026 순심 — All Rights Reserved
-  </footer>
+    <script>
+      /* --- JS 영역 --- */
+      // 스크롤 시 요소 나타나기 효과
+      const observerOptions = { threshold: 0.1 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
 
-  <script>
-    // 향후 인터랙션 기능 확장 가능
-    console.log("순심 가계부 페이지 로딩 완료");
-  </script>
-</body>
+      document
+        .querySelectorAll(".service-card, .project-row, .skill-item")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(30px)";
+          el.style.transition = "all 0.6s ease-out";
+          observer.observe(el);
+        });
+    </script>
+  </body>
 </html>
