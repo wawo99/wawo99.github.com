@@ -5,33 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>순심 | SOONSIM.dev - 20년 경력 IT 전문가</title>
     <style>
-      /* --- 로고 스타일 영역 --- */
       .logo-container {
-        display: flex; /* 로고 요소를 가로로 정렬 */
-        align-items: center; /* 로고 요소를 세로 중앙으로 정렬 */
-        font-family:
-          "Handwritten", cursive; /* 날렵한 느낌의 글꼴 사용 (필요에 따라 변경 가능) */
-        font-size: 2rem; /* 전체 로고 크기 설정 */
+        display: flex;
+        align-items: center;
+        height: 100%; /* 네비게이션 높이에 맞춤 */
       }
 
-      .logo-s-large {
-        color: yellow; /* 옐로우 색상 적용 */
-        font-size: 2rem; /* 첫 번째 S 크기 설정 (크게) */
-      }
-
-      .logo-soon {
-        color: white; /* 블랙 색상 적용 */
-        font-size: 1rem; /* 'Soon' 텍스트 크기 설정 */
-      }
-
-      .logo-s-small {
-        color: yellow; /* 옐로우 색상 적용 */
-        font-size: 1.2rem; /* 두 번째 S 크기 설정 (작게) */
-      }
-
-      .logo-sim {
-        color: white; /* 블랙 색상 적용 */
-        font-size: 0.8rem; /* 'Sim' 텍스트 크기 설정 */
+      .main-logo {
+        height: 45px; /* 로고 높이 조절 (원하시는 크기로 변경하세요) */
+        width: auto; /* 비율 유지 */
+        cursor: pointer;
+        display: block;
       }
       /* --- CSS 영역 --- */
       :root {
@@ -288,10 +272,7 @@
         <nav>
           <div class="" onclick="window.scrollTo(0, 0)">
             <div class="logo-container">
-              <span class="logo-s-large">S</span>
-              <span class="logo-soon">oon</span>
-              <span class="logo-s-small">S</span>
-              <span class="logo-sim">im</span>
+              <img src="logo.png" alt="순심 로고" class="main-logo" />
             </div>
           </div>
           <ul>
